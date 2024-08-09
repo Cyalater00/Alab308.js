@@ -32,3 +32,31 @@ while (true) {
   }
   n++;
 }
+
+// === Part 3 ===//
+// Context: A CSV file, or “Comma-Separated Values” file is traditionally used to store tabular data. You may be familiar with CSVs through past use of programs such as Microsoft Excel or Google Sheets. While each of these programs save their data in different formats to preserve style (e.g., font color or cell backgrounds), at their core, they are storing CSV data.
+
+const csvString =
+  "ID,Name,Occupation,Age\n42,Bruce,Knight,41\n57,Bob,Fry Cook,19\n63,Blaine,Quiz Master,58\n98,Bill,Doctor's Assistant,26";
+
+let currentCell = "";
+let currentRow = [];
+
+for (let i = 0; i < csvString.length; i++) {
+  if (csvString[i] === ",") {
+    currentRow.push(currentCell.trim());
+    currentCell = "";
+  } else if (csvString[i] === "\n") {
+    currentRow.push(currentCell.trim());
+    console.log(currentRow.join(", "));
+    currentRow = [];
+    currentCell = "";
+  } else {
+    currentCell += csvString[i];
+  }
+}
+
+if (currentCell.length > 0) {
+  currentRow.push(currentCell.trim());
+  console.log(currentRow.join(", "));
+}
